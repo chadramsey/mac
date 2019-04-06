@@ -6,7 +6,6 @@ public class ClickerRunnable implements Runnable {
     private volatile boolean shutdown = false;
 
     public void stop() {
-        System.out.println("Stopping");
         shutdown = true;
     }
 
@@ -14,7 +13,7 @@ public class ClickerRunnable implements Runnable {
     public void run() {
         createMacro();
         while (!shutdown) {
-            delay(2.5);
+            delay(1.5);
             if (!shutdown) {
                 leftClick();
             }
