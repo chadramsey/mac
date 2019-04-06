@@ -7,7 +7,6 @@ import static java.lang.System.exit;
 public class AutoClicker extends JFrame {
 
     private static ClickerRunnable runnable;
-    private static Thread process;
     private static JButton button;
     private static boolean isRunning;
 
@@ -48,7 +47,7 @@ public class AutoClicker extends JFrame {
                 button.setText("Running");
                 isRunning = true;
                 runnable = new ClickerRunnable();
-                process = new Thread(runnable);
+                Thread process = new Thread(runnable);
                 process.start();
             }
         }
