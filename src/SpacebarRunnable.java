@@ -1,11 +1,12 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class ClickerRunnable implements Runnable {
+public class SpacebarRunnable implements Runnable {
 
     private Robot bot;
     private volatile boolean shutdown = false;
-    private static final double SECONDS_DELAY = 1.0;
+    private static final double SECONDS_DELAY = 0.5;
 
     void stop() {
         shutdown = true;
@@ -17,7 +18,7 @@ public class ClickerRunnable implements Runnable {
         while (!shutdown) {
             delay();
             if (!shutdown) {
-                leftClick();
+                spacePress();
             }
         }
     }
@@ -26,9 +27,10 @@ public class ClickerRunnable implements Runnable {
         bot.delay((int)(SECONDS_DELAY * 1000.0));
     }
 
-    private void leftClick() {
-        bot.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
-        bot.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
+    private void spacePress() {
+        bot.keyPress(KeyEvent.VK_SPACE);
+        bot.delay((200));
+        bot.keyRelease(KeyEvent.VK_SPACE);
     }
 
     private void createMacro() {
