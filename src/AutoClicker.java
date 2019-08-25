@@ -1,3 +1,6 @@
+import runnables.ClickerRunnable;
+import runnables.SpacebarRunnable;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -19,6 +22,23 @@ public class AutoClicker extends JFrame {
         setSize( 275, 100 );
         setVisible(true);
 
+        constructContainerElements();
+        addActionListeners();
+        configureButtonHotKeys();
+    }
+
+    public static void main(String[] args) {
+        AutoClicker app = new AutoClicker();
+        app.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                exit(0);
+            }
+        });
+    }
+
+    private void constructContainerElements() {
         leftClickButton = new JButton("Not Clicking");
         spaceButton = new JButton("Not Pressing");
 
@@ -26,13 +46,17 @@ public class AutoClicker extends JFrame {
         container.setLayout(new GridLayout(0, 2));
         container.add(leftClickButton);
         container.add(spaceButton);
+    }
 
+    private void addActionListeners() {
         LeftClickButtonHandler leftClickButtonHandler = new LeftClickButtonHandler();
         leftClickButton.addActionListener(leftClickButtonHandler);
 
         SpacePressButtonHandler spacePressButtonHandler = new SpacePressButtonHandler();
         spaceButton.addActionListener(spacePressButtonHandler);
+    }
 
+    private void configureButtonHotKeys() {
         leftClickButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_O, 0), "SpaceHotKey");
         leftClickButton.getActionMap().put("SpaceHotKey", new AbstractAction() {
             @Override
@@ -48,17 +72,6 @@ public class AutoClicker extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 SpacePressButtonHandler handler = new SpacePressButtonHandler();
                 handler.actionPerformed(e);
-            }
-        });
-    }
-
-    public static void main(String[] args) {
-        AutoClicker app = new AutoClicker();
-        app.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                exit(0);
             }
         });
     }

@@ -1,3 +1,5 @@
+package runnables;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -8,7 +10,7 @@ public class SpacebarRunnable implements Runnable {
     private volatile boolean shutdown = false;
     private static final double SECONDS_DELAY = 0.5;
 
-    void stop() {
+    public void stop() {
         shutdown = true;
     }
 

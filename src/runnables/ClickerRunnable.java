@@ -1,3 +1,5 @@
+package runnables;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -7,7 +9,7 @@ public class ClickerRunnable implements Runnable {
     private volatile boolean shutdown = false;
     private static final double SECONDS_DELAY = 1.0;
 
-    void stop() {
+    public void stop() {
         shutdown = true;
     }
 
